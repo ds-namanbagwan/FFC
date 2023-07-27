@@ -238,13 +238,13 @@ const LocationInformation = (data: props) => {
                     )}
                   </div>
                   <div className="available-on">
-                    {data.c_cTAButton2 ? (
+                    {data?.c_cTAButton2 ? (
                       <>
-                        {data.c_cTAButton2.link && data.c_cTAButton2.label ? (
+                        {data?.c_cTAButton2?.link && data?.c_cTAButton2?.label ? (
                           <div className="available-option mb-4">
                             <h5>
-                              {data.c_cTAButton2.label
-                                ? data.c_cTAButton2.label
+                              {data?.c_cTAButton2.label
+                                ? data?.c_cTAButton2?.label
                                 : ""}
                             </h5>
 
@@ -252,18 +252,18 @@ const LocationInformation = (data: props) => {
                               <li>
                                 <Link
                                   href={
-                                    data.c_cTAButton2.linkType == "PHONE"
-                                      ? `tel:${data.c_cTAButton2.link}`
-                                      : data.c_cTAButton2.linkType == "EMAIL"
-                                        ? `mailto:${data.c_cTAButton2.link}`
-                                        : data.c_cTAButton2.link
+                                    data?.c_cTAButton2?.linkType == "PHONE"
+                                      ? `tel:${data?.c_cTAButton2?.link}`
+                                      : data?.c_cTAButton2?.linkType == "EMAIL"
+                                        ? `mailto:${data?.c_cTAButton2?.link}`
+                                        : data?.c_cTAButton2?.link
                                   }
                                   target={
-                                    data.c_cTAButton2.linkType == "PHONE"
+                                    data?.c_cTAButton2?.linkType == "PHONE"
                                       ? "_self"
-                                      : data.c_cTAButton2.linkType == "URL"
+                                      : data?.c_cTAButton2?.linkType == "URL"
                                         ? "_self"
-                                        : data.c_cTAButton2.linkType == "OTHER"
+                                        : data?.c_cTAButton2?.linkType == "OTHER"
                                           ? "_blank"
                                           : "_self"
                                   }

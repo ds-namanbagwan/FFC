@@ -18,7 +18,7 @@ var tabSliderCenter: string = "";
 var mobileSliderCenter: string = "";
 
 const List = (foodItem: c_foodItems) => {
-  console.log(foodItem.props1.label, "check kar na")
+  // console.log(foodItem.props1.label, "check kar na")
   let length = foodItem.prop.length;
   desktopSliderType = length > 4 ? "loop" : "slide";
 
@@ -105,9 +105,9 @@ const List = (foodItem: c_foodItems) => {
                       
                     </div>
                     <div className="text ml-11">
-            {foodItem.props1 ? (
+            {foodItem?.props1 ? (
               <>
-                {foodItem.props1.label && foodItem.props1.link ? (
+                {foodItem?.props1?.label && foodItem?.props1?.link ? (
                   <div className="cta_btn">
                     <Link
                       rel="noopener noreferrer"
@@ -115,32 +115,32 @@ const List = (foodItem: c_foodItems) => {
                       eventName={foodItem.props1.label}
                       // conversionDetails={conversionDetails_primaryCTA}
                       href={
-                        foodItem.props1.linkType == "PHONE"
-                          ? `tel:${foodItem.props1.link}`
+                        foodItem?.props1?.linkType == "PHONE"
+                          ? `tel:${foodItem?.props1?.link}`
                           : foodItem.props1.linkType == "EMAIL"
-                            ? `mailto:${foodItem.props1.link}`
-                            : foodItem.props1.link
+                            ? `mailto:${foodItem?.props1?.link}`
+                            : foodItem?.props1?.link
                       }
                       className="button"
                       target={
-                        foodItem.props1.linkType == "PHONE"
+                        foodItem?.props1?.linkType == "PHONE"
                           ? "_self"
-                          : foodItem.props1.linkType == "URL"
+                          : foodItem?.props1?.linkType == "URL"
                             ? "_self"
-                            : foodItem.props1.linkType == "OTHER"
+                            : foodItem?.props1?.linkType == "OTHER"
                               ? "_blank"
                               : "_self"
                       }
                       onClick={() =>
                         gaEvent(
                           "Restaurant",
-                          foodItem.props1.label,
-                          foodItem.props1.label,
+                          foodItem?.props1?.label,
+                          foodItem?.props1?.label,
                           1
                         )
                       }
                     >
-                      {foodItem.props1 ? foodItem.props1.label : ""}
+                      {foodItem?.props1 ? foodItem?.props1?.label : ""}
                     </Link>
                   </div>
                 ) : (

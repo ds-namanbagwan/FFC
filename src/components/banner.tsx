@@ -55,37 +55,37 @@ const Banner = (Data: props) => {
             )}
           </h1>
           <p>{Data.TagLine ? Data.TagLine : ""}</p>
-          {Data.CtaButton ? (
+          {Data?.CtaButton ? (
             <>
-              {Data.CtaButton.label && Data.CtaButton.link ? (
+              {Data?.CtaButton?.label && Data?.CtaButton?.link ? (
                 <div className="cta_btn">
                   <Link
                     rel="noopener noreferrer"
                     data-ya-track="cta_button"
-                    eventName={Data.CtaButton.label}
+                    eventName={Data?.CtaButton?.label}
                     conversionDetails={conversionDetails_primaryCTA}
                     href={
-                      Data.CtaButton.linkType == "PHONE"
-                        ? `tel:${Data.CtaButton.link}`
-                        : Data.CtaButton.linkType == "EMAIL"
-                          ? `mailto:${Data.CtaButton.link}`
-                          : Data.CtaButton.link
+                      Data?.CtaButton?.linkType == "PHONE"
+                        ? `tel:${Data?.CtaButton?.link}`
+                        : Data?.CtaButton?.linkType == "EMAIL"
+                          ? `mailto:${Data?.CtaButton?.link}`
+                          : Data?.CtaButton?.link
                     }
                     className="button"
                     target={
-                      Data.CtaButton.linkType == "PHONE"
+                      Data?.CtaButton?.linkType == "PHONE"
                         ? "_self"
-                        : Data.CtaButton.linkType == "URL"
+                        : Data?.CtaButton?.linkType == "URL"
                           ? "_self"
-                          : Data.CtaButton.linkType == "OTHER"
+                          : Data?.CtaButton?.linkType == "OTHER"
                             ? "_blank"
                             : "_self"
                     }
                     onClick={() =>
                       gaEvent(
                         "Restaurant",
-                        Data.CtaButton.label,
-                        Data.CtaButton.label,
+                        Data?.CtaButton?.label,
+                        Data?.CtaButton?.label,
                         1
                       )
                     }

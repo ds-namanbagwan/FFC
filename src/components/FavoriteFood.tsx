@@ -105,42 +105,42 @@ const FavoriteFood = (foodItem: c_foodItems) => {
           </Splide>
         </div>
         <div style={{marginLeft:"575px"}}>
-        {foodItem.props1 ? (
+        {foodItem?.props1 ? (
               <>
-                {foodItem.props1.label && foodItem.props1.link ? (
+                {foodItem?.props1?.label && foodItem?.props1?.link ? (
                   <div className="cta_btn">
                     <Link
                       rel="noopener noreferrer"
                       data-ya-track="cta_button"
-                      eventName={foodItem.props1.label}
+                      eventName={foodItem?.props1?.label}
                       // conversionDetails={conversionDetails_primaryCTA}
                       href={
-                        foodItem.props1.linkType == "PHONE"
-                          ? `tel:${foodItem.props1.link}`
-                          : foodItem.props1.linkType == "EMAIL"
-                            ? `mailto:${foodItem.props1.link}`
-                            : foodItem.props1.link
+                        foodItem?.props1?.linkType == "PHONE"
+                          ? `tel:${foodItem?.props1?.link}`
+                          : foodItem?.props1?.linkType == "EMAIL"
+                            ? `mailto:${foodItem?.props1?.link}`
+                            : foodItem?.props1?.link
                       }
                       className="button"
                       target={
-                        foodItem.props1.linkType == "PHONE"
+                        foodItem?.props1?.linkType == "PHONE"
                           ? "_self"
-                          : foodItem.props1.linkType == "URL"
+                          : foodItem?.props1?.linkType == "URL"
                             ? "_self"
-                            : foodItem.props1.linkType == "OTHER"
+                            : foodItem?.props1?.linkType == "OTHER"
                               ? "_blank"
                               : "_self"
                       }
                       onClick={() =>
                         gaEvent(
                           "Restaurant",
-                          foodItem.props1.label,
-                          foodItem.props1.label,
+                          foodItem?.props1?.label,
+                          foodItem?.props1?.label,
                           1
                         )
                       }
                     >
-                      {foodItem.props1 ? foodItem.props1.label : ""}
+                      {foodItem?.props1 ? foodItem?.props1?.label : ""}
                     </Link>
                   </div>
                 ) : (
