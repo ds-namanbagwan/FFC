@@ -1,0 +1,29 @@
+{
+    "$id": "site-entity",
+    "filter": {
+      "entityIds": ["ffc-footer"]
+    },
+    "source": "knowledgeGraph",
+    "fields": [
+        "c_headerLinks1",
+        "name"  ,
+        "c_footerLinks",
+      "facebookPageUrl",
+      "twitterHandle",
+      "instagramHandle",
+      "address",
+      "c_phoneNumber",
+      "c_companyrn",
+      "c_tikTok",
+      "c_canonical",
+      "c_metaDescription",
+      "c_directoryManagerBannerImage",
+      "c_playStore",
+      "c_appStore"
+
+    ],
+    "localization": {
+      "locales": ["en_GB","en"],
+      "primary": false
+    }
+  }
