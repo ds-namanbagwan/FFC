@@ -57,6 +57,7 @@ import {
   HeadConfig,
 } from "@yext/pages";
 
+
 export const config: TemplateConfig = {
   stream: {
     $id: "restaurant",
@@ -293,7 +294,7 @@ export const transformProps: TransformProps<ExternalApiData> = async (
   },${
     data.document.yextDisplayCoordinate &&
     data.document.yextDisplayCoordinate.longitude
-  }&api_key=${liveAPIKey}&v=20181201&resolvePlaceholders=true&entityTypes=${entityTypes}&limit=${limit}&fields=googlePlaceId,slug,address,addressHidden,hours,name,geocodedCoordinate,isoRegionCode,localPhone,mainPhone,timezone,yextDisplayCoordinate,meta,timeZoneUtcOffset,what3WordsAddress,closed`;
+  }&api_key=${liveAPIKey}&v=20181201&resolvePlaceholders=true&entityTypes=${entityTypes}&distance=${radius}&limit=${limit}&fields=googlePlaceId,slug,address,addressHidden,hours,name,geocodedCoordinate,isoRegionCode,localPhone,mainPhone,timezone,yextDisplayCoordinate,meta,timeZoneUtcOffset,what3WordsAddress,closed`;
   const externalApiData = (await fetch(url)
     .then((res: any) => res.json())
     .catch((error: any) => {})) as nearByLocation;
@@ -609,8 +610,9 @@ const Location: Template<ExternalApiRenderData> = ({
             baseUrl={relativePrefixToRoot}
             coords={yextDisplayCoordinate}
             slug={slug}
-            what3WordsAddress={what3WordsAddress}
-          />
+            what3WordsAddress={what3WordsAddress}          />
+           
+           
           <Footer
             data={_site.c_footerLinks}
             address={_site.address}

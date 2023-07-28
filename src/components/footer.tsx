@@ -16,6 +16,7 @@ type props = {
 };
 
 import { svgIcons } from "../svgIcon";
+import ScrollUp from "./ScrollUp";
 var insta: Boolean = false;
 var twitter: Boolean = false;
 var tiktok: Boolean = false;
@@ -206,6 +207,7 @@ const Footer = (footer: props) => {
               )}
             </ul>
           </div>
+          <ScrollUp/>
         </div>
       </footer>
       <CookieConsent

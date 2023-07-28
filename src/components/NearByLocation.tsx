@@ -1,11 +1,8 @@
 import * as React from "react";
-import { useEffect, useState } from "react";
 import "@splidejs/react-splide/css";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import { Link } from "@yext/pages/components";
-import WebApi from "../API/index";
 import {
-  callNearByApi,
   stagingBaseUrl,
   slugify,
   conversionDetailsDirection,
@@ -14,6 +11,7 @@ import {
 import { svgIcons } from "../svgIcon";
 import getDirectionUrl from "../getDirection";
 import gaEvent from "../GTAEvents";
+
 type props = {
   prop: any;
   parents: any;
@@ -28,27 +26,19 @@ type props = {
  * @returns
  */
 const NearByLocation = (entities: props) => {
-  const [data, setData] = useState([]);
+  //MILES
+  const miles = entities.prop.response.distances && entities.prop.response.distances?.map((miles: any) => {
+    return miles;
+  })
 
   const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
 
-  useEffect(() => {
-    if (callNearByApi != "client-side") {
-      setData(entities.prop.response.entities);
-    } else {
-      const data = WebApi.getRequest(entities.coords).then((res) => {
-        setData(res);
-      });
-    }
-  }, [setData]);
-
   return (
-    (entities.prop.response.entities.length == 0)?<></>:
     <>
       <div className="nearby-sec">
         <div className="container">
           <div className="w-full text-center">
-              <h3 className="sec_heading">Nearby Favorite Locations</h3>
+            <h3 className="sec_heading">Nearby Favorite Locations</h3>
           </div>
           <Splide
             id="splide-nearby"
@@ -75,8 +65,10 @@ const NearByLocation = (entities: props) => {
               },
             }}
           >
-            {data &&
-              data.map((e: any, index: any) => {
+
+            {entities.prop.response.entities &&
+              entities.prop.response.entities.map((e: any, index: any) => {
+
                 let url = "";
                 if (!e.slug) {
                   let slugString = e.meta.id + " " + e.name;
@@ -84,15 +76,6 @@ const NearByLocation = (entities: props) => {
                   url = `${slug}.html`;
                 } else {
                   url = `${e.slug.toString()}.html`;
-                }
-
-                var origin: any = null;
-                if (e.address.city) {
-                  origin = e.address.city;
-                } else if (e.address.region) {
-                  origin = e.address.region;
-                } else {
-                  origin = e.address.country;
                 }
 
                 if (entities.slug != e.slug && e.closed != true) {
@@ -147,7 +130,7 @@ const NearByLocation = (entities: props) => {
                         rel="noopener noreferrer"
                         eventName={`what3WordsLink`}
                         onClick={() =>
-                          gaEvent("Restaurant", "what3WordsLink", "W3Words", 1)
+                          gaEvent("Restaurant", "what3WordsLink", "W3Words", 0)
                         }
                       >
                         What3Words
@@ -159,10 +142,19 @@ const NearByLocation = (entities: props) => {
 
                   return (
                     <SplideSlide key={index}>
+
                       <div className="near-location">
                         <h4>
                           <a href={`${stagingBaseUrl}/${url}`}>{e.name}</a>
                         </h4>
+                        {miles.map((items: any, index1: Number) => {
+                          return (
+                            <>
+                              {index == index1 && (
+                                <p className="text-red">{items.distanceMiles}</p>)}
+                            </>
+                          )
+                        })}
                         <div className="store-address">
                           {svgIcons.addressPin}
                           <p
