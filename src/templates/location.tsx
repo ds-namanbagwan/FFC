@@ -16,7 +16,6 @@ import { JsonLd } from "react-schemaorg";
 import favicon from "../images/favicon-live.png";
 import bannerImage from "../images/app-bg.png";
 import { fetch } from "@yext/pages/util";
-import { Link } from "@yext/pages/components";
 import Logo from "../images/logo.svg";
 import MyCustomScriptComponent from "../components/FacebookPixel";
 import ReactGA from "react-ga4";
@@ -56,6 +55,7 @@ import {
   TransformProps,
   HeadConfig,
 } from "@yext/pages";
+import { GoogleReview } from "../components/GoogleReviews";
 
 
 export const config: TemplateConfig = {
@@ -123,15 +123,15 @@ export const config: TemplateConfig = {
       "dm_directoryParents.c_addressRegionDisplayName",
       "c_abouttest",
       "c_ordernowCTA",
-      "c_autogenerate"
+      "c_autogenerate",
+      "c_googleReviewKey",     
     ],
     localization: {
       locales: ["en_GB"],
       primary: false,
     },
     filter: {
-      entityTypes: ["restaurant"],
-      // savedFilterIds: [savedFilterId],
+      entityTypes: ["restaurant"]
     },
   },
 };
@@ -352,7 +352,9 @@ const Location: Template<ExternalApiRenderData> = ({
     _site,
     additionalHoursText,
     c_abouttest,
-    c_autogenerate
+    c_autogenerate,
+    c_googleReviewKey,
+    
   } = document;
 
   let templateData = { document: document, __meta: __meta };
@@ -602,6 +604,12 @@ const Location: Template<ExternalApiRenderData> = ({
           ) : (
             <></>
           )}
+          <GoogleReview
+            reviewSectionHeading={"section heading"}
+            googleReviewsHeading={"section review"}
+            googleReviewUrl={c_googleReviewKey}
+            placeData={googlePlaceId}
+          />
           <NearByLocation
             prop={externalApiData}
             parents={dm_directoryParents}
@@ -609,7 +617,6 @@ const Location: Template<ExternalApiRenderData> = ({
             coords={yextDisplayCoordinate}
             slug={slug}
             what3WordsAddress={what3WordsAddress} />
-
 
           <Footer
             data={_site.c_footerLinks}
