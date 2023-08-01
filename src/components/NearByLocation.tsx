@@ -11,8 +11,11 @@ import {
 import { svgIcons } from "../svgIcon";
 import getDirectionUrl from "../getDirection";
 import gaEvent from "../GTAEvents";
+import Hours from "./hours";
+import OpenCloseStatus from "./OpenCloseStatus";
 
 type props = {
+  additionalHoursText: any;
   prop: any;
   parents: any;
   baseUrl: any;
@@ -26,6 +29,8 @@ type props = {
  * @returns
  */
 const NearByLocation = (entities: props) => {
+  const [timezone, setTimeZone] = React.useState("");
+  const [time, setTime] = React.useState({});
   //MILES
   const miles = entities.prop.response.distances && entities.prop.response.distances?.map((miles: any) => {
     return miles;
@@ -186,6 +191,11 @@ const NearByLocation = (entities: props) => {
                         ) : (
                           <></>
                         )}
+                        <OpenCloseStatus
+                  timezone={timezone ? timezone : ""}
+                  hours={time ? time : {}}    
+                  additionalHoursText={entities.additionalHoursText ? entities.additionalHoursText : null}              
+                ></OpenCloseStatus>
 
                         <div className="store-link">
                           <Link
