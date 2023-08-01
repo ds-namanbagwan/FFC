@@ -146,15 +146,16 @@ const NearByLocation = (entities: props) => {
                       <div className="near-location">
                         <h4>
                           <a href={`${stagingBaseUrl}/${url}`}>{e.name}</a>
+
+                          {miles.map((items: any, index1: Number) => {
+                            return (
+                              <>
+                                {index == index1 && (
+                                  <p className="text-red">{(items.distanceMiles.toFixed(3))}</p>)}
+                              </>
+                            )
+                          })}
                         </h4>
-                        {miles.map((items: any, index1: Number) => {
-                          return (
-                            <>
-                              {index == index1 && (
-                                <p className="text-red">{items.distanceMiles}</p>)}
-                            </>
-                          )
-                        })}
                         <div className="store-address">
                           {svgIcons.addressPin}
                           <p

@@ -122,7 +122,8 @@ export const config: TemplateConfig = {
       "dm_directoryParents.meta.entityType",
       "dm_directoryParents.c_addressRegionDisplayName",
       "c_abouttest",
-      "c_ordernowCTA"
+      "c_ordernowCTA",
+      "c_autogenerate"
     ],
     localization: {
       locales: ["en_GB"],
@@ -155,8 +156,8 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
   let metaDescription = document.c_metaDescription
     ? document.c_metaDescription
     : "Visit your " +
-      document.name +
-      " store for Britain's Tastiest Chicken. Find our menu, order delivery, and timings here.";
+    document.name +
+    " store for Britain's Tastiest Chicken. Find our menu, order delivery, and timings here.";
   let metaTitle = document.c_metaTitle
     ? document.c_metaTitle
     : "Visit " + document.name + " | Britain's Tastiest Chicken!";
@@ -208,11 +209,10 @@ export const getHeadConfig: GetHeadConfig<TemplateRenderProps> = ({
         type: "link",
         attributes: {
           rel: "canonical",
-          href: `${
-            document.c_canonical
-              ? document.c_canonical
-              : stagingBaseUrl + "/" + url
-          }`,
+          href: `${document.c_canonical
+            ? document.c_canonical
+            : stagingBaseUrl + "/" + url
+            }`,
         },
       },
       {
@@ -288,16 +288,14 @@ type ExternalApiData = TemplateProps & { externalApiData: nearByLocation };
 export const transformProps: TransformProps<ExternalApiData> = async (
   data: any
 ) => {
-  const url = `${api_base_url}entities/geosearch?radius=${radius}&location=${
-    data.document.yextDisplayCoordinate &&
+  const url = `${api_base_url}entities/geosearch?radius=${radius}&location=${data.document.yextDisplayCoordinate &&
     data.document.yextDisplayCoordinate.latitude
-  },${
-    data.document.yextDisplayCoordinate &&
+    },${data.document.yextDisplayCoordinate &&
     data.document.yextDisplayCoordinate.longitude
-  }&api_key=${liveAPIKey}&v=20181201&resolvePlaceholders=true&entityTypes=${entityTypes}&distance=${radius}&limit=${limit}&fields=googlePlaceId,slug,address,addressHidden,hours,name,geocodedCoordinate,isoRegionCode,localPhone,mainPhone,timezone,yextDisplayCoordinate,meta,timeZoneUtcOffset,what3WordsAddress,closed`;
+    }&api_key=${liveAPIKey}&v=20181201&resolvePlaceholders=true&entityTypes=${entityTypes}&distance=${radius}&limit=${limit}&fields=googlePlaceId,slug,address,addressHidden,hours,name,geocodedCoordinate,isoRegionCode,localPhone,mainPhone,timezone,yextDisplayCoordinate,meta,timeZoneUtcOffset,what3WordsAddress,closed`;
   const externalApiData = (await fetch(url)
     .then((res: any) => res.json())
-    .catch((error: any) => {})) as nearByLocation;
+    .catch((error: any) => { })) as nearByLocation;
   return { ...data, externalApiData };
 };
 
@@ -354,7 +352,7 @@ const Location: Template<ExternalApiRenderData> = ({
     _site,
     additionalHoursText,
     c_abouttest,
-    c_ordernowCTA
+    c_autogenerate
   } = document;
 
   let templateData = { document: document, __meta: __meta };
@@ -550,7 +548,7 @@ const Location: Template<ExternalApiRenderData> = ({
             TagLine={c_tagline}
             BackgroundImage={c_backgroundImage ? c_backgroundImage.url : bannerImage}
             CtaButton={c_cTAButton}
-            template={"location"} text={undefined}/>
+            template={"location"} text={undefined} />
           <LocationInformation
             prop={hours}
             deliveryHours={deliveryHours}
@@ -578,7 +576,7 @@ const Location: Template<ExternalApiRenderData> = ({
             additionalHoursText={additionalHoursText}
           />
           {description && c_headingH2 ? (
-            <Card prop1={c_headingH2} prop2={c_abouttest} />            
+            <Card prop1={c_headingH2} prop2={c_autogenerate} />
           ) : (
             <></>
           )}
@@ -610,9 +608,9 @@ const Location: Template<ExternalApiRenderData> = ({
             baseUrl={relativePrefixToRoot}
             coords={yextDisplayCoordinate}
             slug={slug}
-            what3WordsAddress={what3WordsAddress}          />
-           
-           
+            what3WordsAddress={what3WordsAddress} />
+
+
           <Footer
             data={_site.c_footerLinks}
             address={_site.address}
